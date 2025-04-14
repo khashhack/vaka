@@ -3,6 +3,7 @@ from flask_cors import CORS
 import requests
 import re
 import uuid
+from flask import render_template
 
 app = Flask(__name__)
 CORS(app)
@@ -15,6 +16,15 @@ WEBHOOK_SECRET = "896ca5379cb66fda16baea22ae09e14f7330529241f6ed633247bbdb847dfb
 
 def email_valido(email):
     return re.match(r"[^@]+@[^@]+\.[^@]+", email)
+
+@app.route('/')
+def home():
+    return render_template("joão.html")
+
+@app.route('/checkout')
+def checkout():
+    return render_template("checkout.html")
+
 
 @app.route("/gerar-pix", methods=["POST"])
 def gerar_pix():
